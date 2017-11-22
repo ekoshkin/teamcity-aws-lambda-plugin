@@ -1,0 +1,5 @@
+rootProject.name = 'teamcity-aws-lambda-plugin'
+
+include 'aws-lambda-agent'
+include 'aws-lambda-common'
+include 'aws-lambda-server'

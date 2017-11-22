@@ -1,0 +1,37 @@
+plugins {
+    id 'com.github.rodm.teamcity-agent' version "1.0"
+}
+
+teamcity {
+    version = teamcityVersion
+
+    agent{
+        descriptor{
+            pluginDeployment{
+                useSeparateClassloader = true
+            }
+        }
+    }
+}
+
+dependencies {
+    compile project(':aws-lambda-common')
+    provided "org.jetbrains.teamcity.internal:agent:$teamcityVersion"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testCompile 'org.testng:testng:6.8'
+    testCompile 'org.jmock:jmock:2.5.1'
+}
+
+agentPlugin.version = null
+agentPlugin.baseName = 'teamcity-aws-lambda'
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.6"
+    }
+}
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = "1.6"
+    targetCompatibility = "1.6"
+}
